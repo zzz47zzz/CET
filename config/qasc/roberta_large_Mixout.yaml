@@ -1,0 +1,23 @@
+# LM_ONLY
+
+# General
+use_wandb: True 
+debug: False 
+run_name: roberta_large_Mixout
+experiment_model: lm_only
+pretrain_model: roberta-large
+dataset: qasc
+input_format: each_option
+is_Mixout: True
+Mixout_prob: 0.9
+
+# Training
+n_epochs: 20
+max_epochs_before_stop: 10
+unfreeze_epoch: 0 
+accumulate_batch_size: 128
+batch_size: 8
+eval_batch_size: 8
+inhouse: True
+lr: 1e-5 
+optim: radam 

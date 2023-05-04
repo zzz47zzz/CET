@@ -1,0 +1,24 @@
+# LM_ONLY
+
+# General
+use_wandb: True 
+debug: False 
+run_name: roberta_large_CET
+experiment_model: lm_only
+pretrain_model: roberta-large
+dataset: obqa
+input_format: each_option
+is_CET: True
+CET_topk: 5
+CET_weight: 0.7
+
+# Training
+n_epochs: 200
+max_epochs_before_stop: 20
+unfreeze_epoch: 0 
+accumulate_batch_size: 128
+batch_size: 4
+eval_batch_size: 8
+inhouse: False
+lr: 1e-5 
+optim: radam 

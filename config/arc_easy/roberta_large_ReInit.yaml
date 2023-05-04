@@ -1,0 +1,24 @@
+# LM_ONLY
+
+# General
+use_wandb: True 
+debug: False 
+run_name: roberta_large_ReInit
+experiment_model: lm_only
+pretrain_model: roberta-large
+dataset: arc_easy
+input_format: each_option
+is_ReInit: True
+ReInit_topk_layer: 3
+
+# Training
+n_epochs: 500
+eval_interval: 5
+max_epochs_before_stop: 25
+unfreeze_epoch: 0 
+accumulate_batch_size: 128
+batch_size: 8
+eval_batch_size: 8
+inhouse: False
+lr: 1e-5 
+optim: radam

@@ -1,0 +1,22 @@
+# LM_ONLY
+
+# General
+use_wandb: True 
+debug: False 
+run_name: roberta_large_baseline
+experiment_model: lm_only
+pretrain_model: roberta-large
+dataset: piqa
+input_format: each_option
+
+
+# Training
+n_epochs: 200 
+max_epochs_before_stop: 5
+unfreeze_epoch: 0 
+accumulate_batch_size: 64
+batch_size: 4
+eval_batch_size: 8
+inhouse: True
+lr: 2e-5 
+optim: radam 
