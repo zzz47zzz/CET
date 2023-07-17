@@ -15,7 +15,7 @@ Besides, we also provide re-implementation of the following methods for a fair c
 - [RecAdam](https://github.com/Sanyuan-Chen/RecAdam): RecAdam optimizes a multi-task objective and utilize an annealing coefficient to gradually shift the objective from pre-training to downstream tasks. 
 - [ReInit](https://openreview.net/forum?id=OQ08SN70M1V): Zhang et. al. verified that transferring the top pre-trained layers slows down learning and hurts performance. ReInit re-initializes the top layers of PLMs when adapting to new tasks.
 
-![图片1](https://github.com/zzz47zzz/CET/assets/52692494/48b66688-739c-48ab-862e-2d113dc76f5c)
+![Method](img/method.png)
 
 - ## Overview of the directory
 - *config/* : the directory of configurations for each models
@@ -83,7 +83,7 @@ Then, the results as well as the model checkpoint will be saved automatically in
 
 ### Experimental results
 
-![1689564741643](https://github.com/zzz47zzz/CET/assets/52692494/902b73a5-4d4f-48f9-bd02-a7629b24b953)
+![Result](img/result.jpg)
 
 
 If you find the code useful, please consider citing this work
