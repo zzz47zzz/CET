@@ -2,7 +2,7 @@
 
 This repo provides the source code for our method
 
-- [CET](https://arxiv.org/abs/2306.10790) : a fine-tuning method for preserving commonsense knowledge from Pre-trained LMs
+- [CET](https://aclanthology.org/2023.acl-long.509/) : a fine-tuning method for preserving commonsense knowledge from Pre-trained LMs
 
 Besides, we also provide re-implementation of the following methods for a fair comparison:
 
