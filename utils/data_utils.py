@@ -291,6 +291,7 @@ class InputExample(object):
         self.label = label
         self.input_str = input_str
         self.ref_str = ref_str
+        self.target_str = target_str
 
 def read_statement_examples(input_file, args):
     with open(input_file, "r", encoding="utf-8") as f:

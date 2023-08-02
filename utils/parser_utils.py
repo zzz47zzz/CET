@@ -105,6 +105,7 @@ def add_optimization_arguments(parser):
     parser.add_argument('--lr_schedule', default='fixed', choices=['fixed', 'warmup_linear', 'warmup_constant'], help='learning rate scheduler')
     parser.add_argument('--max_grad_norm', default=1.0, type=float, help='max grad norm (0 to disable)')
     parser.add_argument('--weight_decay', default=0.01, type=float, help='l2 weight decay strength')
+    parser.add_argument("--max_input_len", default=None, help="...")
     
 def get_args(is_save=False):
     """A helper function that handles the arguments for the whole experiment"""
