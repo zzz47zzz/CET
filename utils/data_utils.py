@@ -121,15 +121,6 @@ class BatchGenerator(object):
                                                 max_length=self.args.max_input_len
                                             ).to(self.device)
 
-                elif k in ['target_str']:
-                    batch_data['target_LM_input'] = self.tokenizer(
-                                                    batch_data['target_str'], 
-                                                    return_tensors="pt", 
-                                                    padding='longest', 
-                                                    truncation=True,
-                                                    max_length=self.args.max_input_len
-                                                ).to(self.device)
-
                 elif self.args.is_CET and k in ['ref_str'] and is_load_ref_str:
                     if np.sum(batch_data['ref_cnt']) == 0:
                         batch_data['ref_LM_input'] = None
@@ -282,7 +273,7 @@ class BatchGenerator(object):
         self.input_data = input_data
 
 class InputExample(object):
-    def __init__(self, example_id, contexts, endings, endings_label, label, input_str, target_str, ref_str):
+    def __init__(self, example_id, contexts, endings, endings_label, label, input_str, ref_str):
         # General
         self.example_id = example_id
         self.contexts = contexts
@@ -332,8 +323,6 @@ def read_statement_examples(input_file, args):
                 input_str = [ct+' '+ed for ct, ed in zip(contexts,endings)]
                 # ref_str
                 ref_str = json_dic.get("ref_ans",[])
-                # target_str
-                target_str = [endings[label]]*num_choice
             elif args.input_format=='all_option':
                 # context
                 contexts = json_dic["question"]["stem"]
@@ -350,8 +339,6 @@ def read_statement_examples(input_file, args):
                     input_str += '('+chr(ord('A')+ed_idx)+')'+' '+ed+' '
                 # ref_str
                 ref_str = json_dic.get("ref_ans",[])
-                # target_str
-                target_str = endings[label]
             else:
                 raise Exception('Invalid input_format %s'%args.input_format)
 
@@ -363,8 +350,7 @@ def read_statement_examples(input_file, args):
                     endings_label = endings_label,
                     label = label,
                     input_str = input_str,
-                    ref_str = ref_str,
-                    target_str = target_str
+                    ref_str = ref_str
                 ))
     return examples
 
@@ -397,8 +383,7 @@ def load_input_data(split_name, args):
             'endings_label': [e.endings_label for e in examples],
             'endings': [e.endings for e in examples],
             'input_str': [e.input_str for e in examples],
-            'ref_str': [e.ref_str for e in examples],
-            'target_str': [e.target_str for e in examples],
+            'ref_str': [e.ref_str for e in examples]
         }
         with open(cache_path,'wb') as f:
             pickle.dump(input_data,f,protocol=4)

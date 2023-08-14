@@ -86,7 +86,6 @@ def train(args, wandb_log):
     ###################################################################################################
     assert torch.cuda.is_available() and torch.cuda.device_count()>=1, 'No gpu avaliable!'
 
-    is_data_parellel = False
     # Note: Only using the pre-defined gpu_idx when debug; Otherwise, use CUDA_VISIBLE_DEVICES to specify the devices
     if (not args.use_wandb) and (args.gpu_idx is not None):
         gpu_idx = args.gpu_idx
@@ -97,12 +96,6 @@ def train(args, wandb_log):
     else:
         # logger.info('{0:>30}: {1}'.format('Visible GPU count',torch.cuda.device_count()))
         devices = torch.device(0)
-        if torch.cuda.device_count()>1:
-            is_data_parellel = True
-    # logger.info('{0:>30}: {1}'.format('Using visible GPU',str(devices)))
-
-    # for debug
-    # devices = 'cpu'
 
     ###################################################################################################
     #   Build model                                                                                   #
@@ -157,10 +150,6 @@ def train(args, wandb_log):
             if name:
                 recursive_setattr(model.pretrain_model, name, replace_layer_for_mixout(module, mixout_prob=args.Mixout_prob))
 
-    # DataParellel
-    if is_data_parellel:
-        logger.info('Using data parallel ...')
-        model = torch.nn.DataParallel(model, device_ids=list(range(torch.cuda.device_count())))
     logger.info('Parameters statistics')
     params_statistic(model)
 
@@ -192,6 +181,7 @@ def train(args, wandb_log):
     #   Build Optimizer                                                                               #
     ###################################################################################################
     logger.info("Build optimizer")
+    model.to(devices)
     optimizer, scheduler = get_optimizer(model, args, dataset)
 
     # ChildTune

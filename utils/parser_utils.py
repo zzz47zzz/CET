@@ -40,7 +40,8 @@ def add_data_arguments(parser):
     
     parser.add_argument('--dataset', default='csqa', help='dataset name')
     parser.add_argument('--inhouse', default=False, type=bool_flag, nargs='?', const=True, help='run in-house setting')
-
+    
+    parser.add_argument('--max_input_len', default=128, type=int, help='max input length')
     parser.add_argument("--input_format", default='each_option', type=str, choices=['each_option','all_option'], help='The input format')
     parser.add_argument("--is_skip_last_batch", default=False, type=bool_flag, help='If skip the last mini-batch')
 
