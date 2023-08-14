@@ -181,7 +181,11 @@ def train(args, wandb_log):
     #   Build Optimizer                                                                               #
     ###################################################################################################
     logger.info("Build optimizer")
-    model.to(devices)
+
+    # You can use DataParallel here
+    # model.pretrain_model = nn.DataParallel(model.pretrain_model, device_ids=(0,1))
+    # model.pretrain_model.to(devices)
+    
     optimizer, scheduler = get_optimizer(model, args, dataset)
 
     # ChildTune
