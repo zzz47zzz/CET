@@ -1,3 +1,4 @@
 data/
+wandb/
 save_models/
 __pycache__

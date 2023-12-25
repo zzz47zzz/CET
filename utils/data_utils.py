@@ -164,7 +164,7 @@ class BatchGenerator(object):
     def generate_refs(self, model=None, load_cache=True):
 
         input_data = self.input_data
-        sim_thres = self.args.CET_dist_thres
+        sim_thres = self.args.CET_sim_thres
         cache_path = os.path.join(self.args.dataset_dir,'ref_str_{}_{}_nsamples{}_top{}_{}.pk'.format(
                                     self.args.input_format,
                                     self.args.pretrain_model,

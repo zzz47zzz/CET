@@ -108,7 +108,7 @@ class BERT_basic(nn.Module):
 
             # (bs,1)
             ref_weight = torch.tensor(input_data['ref_cnt']).float().to(prob_score.device).reshape(-1,1)
-            ref_weight[ref_weight>0] = 1-self.args.CET_weight
+            ref_weight[ref_weight>0] = 1-self.args.CET_W0
             # (bs,nc)
             joint_prob_score = (1-ref_weight)*prob_score + ref_weight*ref_prob_score
             
@@ -164,8 +164,8 @@ class BERT_basic(nn.Module):
                 # (ref_cnt, )
                 sum_ref_loss = nn.CrossEntropyLoss(reduction='sum')(ref_logits_onesample, torch.tensor([labels[tmp_i]]*ref_cnt, device=labels.device))
                 
-                loss_joint[tmp_i] = self.args.CET_weight * loss_anchor[tmp_i] + \
-                                        (1-self.args.CET_weight) * (sum_ref_loss/ref_cnt)
+                loss_joint[tmp_i] = self.args.CET_W0 * loss_anchor[tmp_i] + \
+                                        (1-self.args.CET_W0) * (sum_ref_loss/ref_cnt)
 
         loss = loss_joint.mean()
 

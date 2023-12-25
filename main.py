@@ -213,6 +213,10 @@ def train(args, wandb_log):
 
     is_finish = False
     accumulate_batch_num = args.accumulate_batch_size//args.batch_size
+
+    if args.is_CET:
+        train_loader.generate_refs(model=model, load_cache=True)
+
     for epoch_id in trange(start_epoch, args.n_epochs, desc="Epoch"):
 
         model.epoch_idx = epoch_id
